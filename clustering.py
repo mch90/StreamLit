@@ -15,9 +15,15 @@ sns.set_theme()
 # Load data from external source
 @st.cache
 def load_data():
-    df = pd.read_csv(
-        "https://raw.githubusercontent.com/ThuwarakeshM/PracticalML-KMeans-Election/master/voters_demo_sample.csv"
-    )
+
+
+
+
+    #Read sensor data from testing on 01_02_2021
+    df = pd.read_csv("https://raw.githubusercontent.com/mch90/datasets/main/dataset_customer_B.csv",parse_dates=['time'])
+    # Renaming columns
+    df.columns=['time','Test_id','BL_x','BL_y','BL_z','BP_x','BP_y','BP_z','AP_x','AP_y','AP_z','AL_x','AL_y','AL_z']
+
     return df
 
 
@@ -25,7 +31,7 @@ df = load_data()
 
 
 def run_kmeans(df, n_clusters=2):
-    kmeans = KMeans(n_clusters, random_state=0).fit(df[["Age", "Income"]])
+    kmeans = KMeans(n_clusters, random_state=0).fit(df[["BL_x", "BL_y"]])
 
     fig, ax = plt.subplots(figsize=(16, 9))
 
@@ -41,22 +47,22 @@ def run_kmeans(df, n_clusters=2):
     # Create scatterplot
     ax = sns.scatterplot(
         ax=ax,
-        x=df.Age,
-        y=df.Income,
+        x=df.BL_x,
+        y=df.BL_y,
         hue=kmeans.labels_,
         palette=sns.color_palette("colorblind", n_colors=n_clusters),
         legend=None,
     )
 
     # Annotate cluster centroids
-    for ix, [age, income] in enumerate(kmeans.cluster_centers_):
-        ax.scatter(age, income, s=200, c="#a8323e")
+    for ix, [BL_x, BL_y] in enumerate(kmeans.cluster_centers_):
+        ax.scatter(BL_x, BL_y, s=200, c="#a8323e")
         ax.annotate(
             f"Cluster #{ix+1}",
-            (age, income),
+            (BL_x, BL_y),
             fontsize=25,
             color="#a8323e",
-            xytext=(age + 5, income + 3),
+            xytext=(BL_x+1, BL_y+1),
             bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="#a8323e", lw=2),
             ha="center",
             va="center",
