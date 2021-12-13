@@ -93,8 +93,15 @@ n_clusters = sidebar.slider(
 
 sidebar.write(
     """
-Some links for contact
-    """
+        """
+    - 🗂️ Choose a dataset (customer)
+    - 🗂️ Choose data columns
+    - ⚙  Pick a number of clusters for K-means
+    - 📉 Check its performance metrics and decision boundary on train and test data
+    - 🩺 Determine whteher it correclty reflect the produciton line statuses and experiment with other number of clusters
+-----
+"""
+"""
 )
 # -----------------------------------------------------------
 
