@@ -182,6 +182,9 @@ st.write(run_kmeans(df, n_clusters=n_clusters))
 There’s a point where the SSE curve starts to bend known as the elbow point. 
 Find the x-value of this point to determine the reasonable trade-off between 
 (small-enough) error and (small-enough) number of clusters. 
+
+So the goal is to choose a small value of K (clusters) that still has a low SSE, and the elbow
+represents, where we start to have diminishing returns by increasing k.
 """
 # Show silhouette analysis
 st.write(run_elbow(df))
