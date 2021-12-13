@@ -143,7 +143,7 @@ sidebar.write(
     """
 # Finding the number of clusters
 ### Elbow test
-First method is the elbow method. It is based on the {squared error(SSE){ for some value of K. 
+First method is the elbow method. It is based on the squared error (SSE) for some value of K. 
 SSE is defined as the sum of the squared distance between centroid and each member of the cluster. 
 In the plot of the Number of Clusters against SSE graph we observe that as K increases SSE decreases as disortation will be small. 
 
