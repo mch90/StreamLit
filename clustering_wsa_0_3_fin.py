@@ -33,7 +33,7 @@ sns.set_theme()
 # -----------------------------------------------------------
 # Load data from external source
 
-def file_selector(folder_path=".\datasets"):
+def file_selector(folder_path="./datasets"):
     filenames = os.listdir(folder_path)
     csv_files = list(filter(lambda f: f.endswith('.csv'), filenames))
     selected_filename = st.selectbox("Select a file with data from customer", csv_files)
