@@ -453,8 +453,8 @@ def run_pca(new_df_pca):
 # -----------------------------------------------------------
 
 
-menu = ["Upload csv file","Other options not implemented"]
-choice = st.sidebar.selectbox("File upload menu",menu)
+menu = ["Upload csv file","Upload txt file"]
+choice = st.sidebar.selectbox("File upload menu: select file format",menu)
 df_second_data = st.sidebar.checkbox("Upload second dataset (for pseudo live-streaming simulation)?", value=False)
 
 
@@ -509,12 +509,37 @@ if choice == "Upload csv file":
         df_test = pd.read_csv(data_file)
         data_file.seek(0)
         #df_test.columns=['test']
+
+        
         if "." in str(df_test[df_test.columns[2]].values[1]):
+        #if "." in str(df_test.iloc[3][1]):
             df = pd.read_csv(data_file, decimal=".")
         else:
             df = pd.read_csv(data_file, decimal=",")
 
         st.dataframe(df)
+
+elif choice == "Upload txt file":
+
+    data_file = st.file_uploader("Upload TXT",type=['txt'])
+
+    if data_file is not None:
+
+            file_details = {"Filename":data_file.name,"FileType":data_file.type,"FileSize":data_file.size}
+            st.write(file_details)
+
+            df_test = pd.read_csv(data_file)
+            data_file.seek(0)
+            #df_test.columns=['test']
+
+            
+            #if "." in str(df_test[df_test.columns[2]].values[1]):
+            if "." in str(df_test.iloc[3][1]):
+                df = pd.read_csv(data_file, decimal=".")
+            else:
+                df = pd.read_csv(data_file, decimal=",")
+
+            st.dataframe(df)       
 
 
 if df_second_data:
