@@ -482,28 +482,6 @@ if choice == "Upload csv file":
         file_details = {"Filename":data_file.name,"FileType":data_file.type,"FileSize":data_file.size}
         st.write(file_details)
 
-        df_test = pd.read_csv(data_file)
-        data_file.seek(0)
-        #df_test.columns=['test']
-
-        
-        if "." in str(df_test[df_test.columns[2]].values[1]):
-        #if "." in str(df_test.iloc[3][1]):
-            df = pd.read_csv(data_file, decimal=".")
-        else:
-            df = pd.read_csv(data_file, decimal=",")
-
-        st.dataframe(df)
-
-elif choice == "Upload txt file":
-
-    data_file = st.file_uploader("Upload TXT",type=['txt'])
-
-    if data_file is not None:
-
-        file_details = {"Filename":data_file.name,"FileType":data_file.type,"FileSize":data_file.size}
-        st.write(file_details)
-
         df_test = pd.read_csv(data_file,names=['Category','x','y','z'],header=0)
         data_file.seek(0)
         #df_test.columns=['test']
@@ -517,6 +495,28 @@ elif choice == "Upload txt file":
 
         else:
             df = pd.read_csv(data_file, decimal=",",names=['Category','x','y','z'],header=0)
+
+        st.dataframe(df)
+
+elif choice == "Upload txt file":
+
+    data_file = st.file_uploader("Upload TXT",type=['txt'])
+
+    if data_file is not None:
+
+            file_details = {"Filename":data_file.name,"FileType":data_file.type,"FileSize":data_file.size}
+            st.write(file_details)
+
+            df_test = pd.read_csv(data_file)
+            data_file.seek(0)
+            #df_test.columns=['test']
+
+            
+            #if "." in str(df_test[df_test.columns[2]].values[1]):
+            if "." in str(df_test.iloc[3][1]):
+                df = pd.read_csv(data_file, decimal=".")
+            else:
+                df = pd.read_csv(data_file, decimal=",")
 
             st.dataframe(df)       
 
@@ -699,6 +699,12 @@ if df_second_data:
 
             else:
                 df_2 = pd.read_csv(data_file_2, decimal=",",names=['Category','x','y','z'],header=0)
+
+
+
+
+
+
 
             st.dataframe(df_2)
 
