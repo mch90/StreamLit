@@ -501,19 +501,22 @@ elif choice == "Upload txt file":
 
     if data_file is not None:
 
-            file_details = {"Filename":data_file.name,"FileType":data_file.type,"FileSize":data_file.size}
-            st.write(file_details)
+        file_details = {"Filename":data_file.name,"FileType":data_file.type,"FileSize":data_file.size}
+        st.write(file_details)
 
-            df_test = pd.read_csv(data_file)
-            data_file.seek(0)
-            #df_test.columns=['test']
+        df_test = pd.read_csv(data_file,names=['Category','x','y','z'],header=0)
+        data_file.seek(0)
+        #df_test.columns=['test']
 
-            
-            #if "." in str(df_test[df_test.columns[2]].values[1]):
-            if "." in str(df_test.iloc[3][1]):
-                df = pd.read_csv(data_file, decimal=".")
-            else:
-                df = pd.read_csv(data_file, decimal=",")
+        if "." in str(df_test[df_test.columns[2]].values[1]):
+        #if "." in str(df_test.iloc[3][1]):
+            df = pd.read_csv(data_file, decimal=".",names=['Category','x','y','z'],header=0)
+
+        elif ";" in str(df_test[df_test.columns[2]].values[1]):
+            df = pd.read_csv(data_file, sep=";",decimal=",",names=['Category','x','y','z'],header=0)
+
+        else:
+            df = pd.read_csv(data_file, decimal=",",names=['Category','x','y','z'],header=0)
 
             st.dataframe(df)       
 
@@ -683,13 +686,19 @@ if df_second_data:
             file_2_details = {"Filename":data_file_2.name,"FileType":data_file_2.type,"FileSize":data_file_2.size}
             st.write(file_2_details)
 
-            df_test_2 = pd.read_csv(data_file_2)
+            df_test_2 = pd.read_csv(data_file,names=['Category','x','y','z'],header=0)
             data_file_2.seek(0)
             #df_test.columns=['test']
-            if "." in str(df_test_2[df_test_2.columns[2]].values[1]):
-                df_2 = pd.read_csv(data_file_2, decimal=".")
+
+            if "." in str(df_test[df_test_2.columns[2]].values[1]):
+            #if "." in str(df_test.iloc[3][1]):
+                df_2 = pd.read_csv(data_file_2, decimal=".",names=['Category','x','y','z'],header=0)
+
+            elif ";" in str(df_test[df_test_2.columns[2]].values[1]):
+                df_2 = pd.read_csv(data_file_2, sep=";",decimal=",",names=['Category','x','y','z'],header=0)
+
             else:
-                df_2 = pd.read_csv(data_file_2, decimal=",")
+                df_2 = pd.read_csv(data_file_2, decimal=",",names=['Category','x','y','z'],header=0)
 
             st.dataframe(df_2)
 
