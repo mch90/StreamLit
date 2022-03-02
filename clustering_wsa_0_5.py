@@ -282,8 +282,8 @@ def run_kmeans(df,pca_result, n_clusters=2):
             (pca_one, pca_two),
             fontsize=25,
             color="#a8323e",
-            xytext=(pca_one + 0.5, pca_two + 0.5),
-            bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="#a8323e", lw=2),
+            xytext=(pca_one , pca_two ),
+            bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="#a8323e", lw=2,alpha=0.5),
             ha="center",
             va="center",
         )
